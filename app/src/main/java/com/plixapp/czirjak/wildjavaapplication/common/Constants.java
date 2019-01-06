@@ -10,4 +10,6 @@ public class Constants {
     public static final String HUNTERID = "HUNTERID";
     public static final String DEFAULT_PASSWORD = "asdfasdf";
     public static final String DEFAULT_EMAIL = "asd@bb.cc";
+    public static final String LOGINSUCCESS = "LOGINSUCCESS";
+    public static final String NO_CONNECTIONS_ERROR = "NoConnectionError";
 }

@@ -41,12 +41,24 @@ public class LoginActivity extends AppCompatActivity {
                 binding.emailSignInButton.setEnabled(true);
                 Intent intent = new Intent(this, WildsActivity.class);
                 intent.putExtra(Constants.HUNTERID, succesResponse.getData().getHunter());
+                intent.putExtra(Constants.LOGINSUCCESS, true);
                 startActivity(intent, ActivityOptions.makeCustomAnimation(this, R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top).toBundle());
             }, error ->
             {
+
                 binding.loginProgress.setVisibility(View.GONE);
                 binding.emailSignInButton.setEnabled(true);
-                Toast.makeText(this, R.string.error_invalid_credentials, Toast.LENGTH_LONG).show();
+                if (error.getLocalizedMessage().contains(Constants.NO_CONNECTIONS_ERROR)) {
+                    if (binding.email.getText().toString().equals(Constants.DEFAULT_EMAIL) && binding.password.getText().toString().equals(Constants.DEFAULT_PASSWORD)) {
+                        Intent intent = new Intent(this, WildsActivity.class);
+                        intent.putExtra(Constants.LOGINSUCCESS, false);
+                        startActivity(intent, ActivityOptions.makeCustomAnimation(this, R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top).toBundle());
+                    } else {
+                        Toast.makeText(this, R.string.error_invalid_credentials, Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(this, error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                }
             });
         });
     }

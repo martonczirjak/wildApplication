@@ -8,7 +8,6 @@ import android.widget.Toast;
 import com.plixapp.czirjak.wildjavaapplication.R;
 import com.plixapp.czirjak.wildjavaapplication.common.Constants;
 import com.plixapp.czirjak.wildjavaapplication.databinding.ActivityWildsBinding;
-import com.plixapp.czirjak.wildjavaapplication.login.requests.LoginResponse;
 import com.plixapp.czirjak.wildjavaapplication.wilds.wildsrequests.WildsResponse;
 import com.plixapp.czirjak.wildjavaapplication.wilds.wildsservice.WildsService;
 import com.plixapp.czirjak.wildjavaapplication.wilds.wildsservice.WildsWebService;
@@ -16,7 +15,7 @@ import com.rainy.networkhelper.future.ExecutionFuture;
 /**
  * A wilds screen that offers to show the wilds.
  */
-public class WildsActivity extends AppCompatActivity {
+public class WildsActivity extends AppCompatActivity implements OnWildItemClickListener {
 
     private ActivityWildsBinding binding;
     private WildsService wildsService = new WildsWebService();
@@ -39,9 +38,9 @@ public class WildsActivity extends AppCompatActivity {
         }
         wildsService.cleanDatabase();
         wildsService.getWildsAndLoadToDatabase(hunterId, Constants.DEFAULT_PASSWORD, this).enqueue(success -> {
-            binding.recyclerView.setAdapter(new WildsAdapter(success.getWildsList().wilds));
+            binding.recyclerView.setAdapter(new WildsAdapter(success.getWildsList().wilds,this));
         }, error -> {
-            Toast.makeText(this, "Hiba" + error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Hiba:" + error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -49,5 +48,10 @@ public class WildsActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         if (getWildsRequest != null) getWildsRequest.cancel(true);
+    }
+
+    @Override
+    public void click(String name) {
+        Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
     }
 }
