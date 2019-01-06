@@ -1,4 +1,4 @@
-package com.plixapp.czirjak.wildjavaapplication.login;
+package com.plixapp.czirjak.wildjavaapplication.login.ui;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
@@ -9,11 +9,12 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.plixapp.czirjak.wildjavaapplication.R;
+import com.plixapp.czirjak.wildjavaapplication.common.Constants;
 import com.plixapp.czirjak.wildjavaapplication.databinding.ActivityLoginBinding;
 import com.plixapp.czirjak.wildjavaapplication.login.loginservice.LoginService;
 import com.plixapp.czirjak.wildjavaapplication.login.loginservice.LoginWebService;
 import com.plixapp.czirjak.wildjavaapplication.login.requests.LoginResponse;
-import com.plixapp.czirjak.wildjavaapplication.wilds.WildsActivity;
+import com.plixapp.czirjak.wildjavaapplication.wilds.ui.WildsActivity;
 import com.rainy.networkhelper.future.ExecutionFuture;
 
 /**
@@ -34,11 +35,13 @@ public class LoginActivity extends AppCompatActivity {
             binding.loginProgress.setVisibility(View.VISIBLE);
             binding.emailSignInButton.setEnabled(false);
             loginRequest = loginService.login(binding.email.getText().toString(), binding.password.getText().toString(), this);
-            loginRequest.enqueue(request ->
+            loginRequest.enqueue(succesResponse ->
             {
                 binding.loginProgress.setVisibility(View.GONE);
                 binding.emailSignInButton.setEnabled(true);
-                startActivity(new Intent(this, WildsActivity.class), ActivityOptions.makeCustomAnimation(this, R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top).toBundle());
+                Intent intent = new Intent(this, WildsActivity.class);
+                intent.putExtra(Constants.HUNTERID, succesResponse.getData().getHunter());
+                startActivity(intent, ActivityOptions.makeCustomAnimation(this, R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top).toBundle());
             }, error ->
             {
                 binding.loginProgress.setVisibility(View.GONE);
@@ -51,6 +54,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(loginRequest!=null) loginRequest.cancel(true);
+        if (loginRequest != null) loginRequest.cancel(true);
     }
 }

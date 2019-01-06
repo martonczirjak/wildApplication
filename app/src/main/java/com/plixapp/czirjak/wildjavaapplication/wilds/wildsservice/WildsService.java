@@ -8,5 +8,5 @@ import com.rainy.networkhelper.future.ExecutionFuture;
 public interface WildsService {
     void cleanDatabase();
 
-    ExecutionFuture<WildsResponse> getWildsAndLoadToDatabase(String email, String password, Context context);
+    ExecutionFuture<WildsResponse> getWildsAndLoadToDatabase(String hunterId, String password, Context context);
 }

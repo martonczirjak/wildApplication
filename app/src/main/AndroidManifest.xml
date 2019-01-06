@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".login.LoginActivity"
+            android:name=".login.ui.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".wilds.WildsActivity"
+            android:name=".wilds.ui.WildsActivity"
             android:screenOrientation="portrait" />
     </application>
 
