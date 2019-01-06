@@ -1,3 +1,11 @@
 <resources>
+
     <string name="app_name">WildJavaApplication</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password </string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_invalid_credentials">This password or email is wrong.</string>
+    <string name="download_error">Some error happened under the process.</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
 </resources>

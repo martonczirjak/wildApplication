@@ -1,9 +1,11 @@
-package com.plixapp.czirjak.wildjavaapplication;
+package com.plixapp.czirjak.wildjavaapplication.login;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.plixapp.czirjak.wildjavaapplication.R;
+
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
