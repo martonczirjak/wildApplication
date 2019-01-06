@@ -25,6 +25,10 @@
         <activity
             android:name=".wilds.ui.WildsActivity"
             android:screenOrientation="portrait" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="e8432fbb516f4989d07ae3fa27156896faa2b286"
+            />
     </application>
 
 </manifest>
