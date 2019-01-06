@@ -8,4 +8,5 @@
     <string name="error_invalid_credentials">This password or email is wrong.</string>
     <string name="download_error">Some error happened under the process.</string>
     <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="unknown_issue">Ismeretlen hiba tortent.</string>
 </resources>

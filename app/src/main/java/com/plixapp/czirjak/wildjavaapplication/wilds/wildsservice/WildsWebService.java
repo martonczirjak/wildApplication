@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmObject;
+import io.realm.RealmResults;
 import io.realm.internal.annotations.ObjectServer;
 
 public class WildsWebService implements WildsService {
@@ -45,6 +47,25 @@ public class WildsWebService implements WildsService {
                 return wildsResponse;
             }
         };
+    }
+
+    @Override
+    public List<Wild> getWildsFromDataBase(){
+        List<Wild> wilds = new ArrayList<>();
+        Realm defaultInstance = Realm.getDefaultInstance();
+        RealmResults<WildRealmModel> all = defaultInstance.where(WildRealmModel.class).findAll();
+        for (WildRealmModel wildRealmModel : all) {
+            Wild wild = new Wild();
+            wild.setId(wildRealmModel.getServerId());
+            wild.setName_sk(wildRealmModel.getName());
+            wilds.add(wild);
+        }
+        return wilds;
+    }
+
+    @Override
+    public void closeDatabase(){
+        Realm.getDefaultInstance().close();
     }
 
 
